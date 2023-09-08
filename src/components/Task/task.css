@@ -1,0 +1,38 @@
+.task-card {
+  width: 365px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-title {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.task-description {
+  font-size: 1rem;
+  color: #666;
+  margin: 8px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.task-due-date,
+.task-priority,
+.task-status,
+.task-assignedTeam {
+  font-size: 0.9rem;
+  color: #888;
+}

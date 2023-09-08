@@ -1,0 +1,61 @@
+.singleTask-container{
+    width: 80%;
+    padding: 16px;
+    margin: 16px;
+    background-color: #fff;
+  }
+  
+  .singleTask-title {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  .singleTask-description {
+    font-size: 1rem;
+    color: #666;
+    margin: 8px 0;
+  }
+  
+  .singleTask-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+  }
+  
+  .singleTask-due-date,
+  .singleTask-priority {
+    font-size: 0.9rem;
+    color: #888;
+  }
+  
+  .singleTask-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  
+  .complete-singleTask-button,
+  .assign-singleTask-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .complete-singleTask-button:hover,
+  .assign-singleTask-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .assign-singleTask-button {
+    background-color: #28a745;
+  }
+  
+  .assign-singleTask-button:hover {
+    background-color: #218838;
+  }
+  
