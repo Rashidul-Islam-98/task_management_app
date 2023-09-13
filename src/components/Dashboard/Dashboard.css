@@ -1,0 +1,10 @@
+.dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout {
+    color: cornflowerblue;
+    cursor: pointer;
+}

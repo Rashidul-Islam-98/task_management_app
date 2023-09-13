@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { openDatabase } from '../../config/db';
+import "./createTeam.css";
 
 const CreateTeam = () => {
-  const [teams, setTeams] = useState([]);
   const [newTeamName, setNewTeamName] = useState('');
   const [users, setUsers] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
@@ -47,15 +47,16 @@ const CreateTeam = () => {
       members: users.filter((user) => selectedMembers.includes(user.id)),
     };
 
-    setTeams((prevTeams) => [...prevTeams, newTeam]);
+    const existingTeams = JSON.parse(localStorage.getItem("Teams")) || [];
+    const updatedTeams = [...existingTeams, newTeam];
+    localStorage.setItem("Teams", JSON.stringify(updatedTeams));
 
-    localStorage.setItem("Teams",JSON.stringify([...teams, newTeam]));
     setNewTeamName('');
     setSelectedMembers([]);
   };
 
   return (
-    <div>
+    <div className='createTeam'>
       <div>
         <h2>Create a New Team</h2>
         <input

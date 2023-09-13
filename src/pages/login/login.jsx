@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/Auth/auth"; 
 import { openDatabase } from "../../config/db";
 import "./login.css";
@@ -8,6 +8,7 @@ export default function Login() {
   const userRef = useRef();
   const passwordRef = useRef();
   const { dispatch} = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ export default function Login() {
       if (user) {
         if (user.password === password) {
           dispatch({ type: "LOGIN", payload: user });
+          navigate("/");
         } else {
           console.log("Login failed: Incorrect password");
         }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './create.css';
 import { getDatabase } from '../../config/db';
 
@@ -7,9 +8,9 @@ const Create = () => {
   const [desc, setDesc] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState('Low');
-  const [status, setStatus] = useState('');
-  const [assignedTeam, setAssignedTeam] = useState('');
   const teams = localStorage.getItem("Teams") ? JSON.parse(localStorage.getItem("Teams")) : [];
+  const [status, setStatus] = useState('New');
+  const [assignedTeam, setAssignedTeam] = useState(teams[0].name);
 
 
   const handleSubmit = (e) => {
@@ -32,8 +33,8 @@ const Create = () => {
     setDesc('');
     setDueDate('');
     setPriority('Low');
-    setStatus('');
-    setAssignedTeam('');
+    setStatus('New');
+    setAssignedTeam(teams[0].name);
   };
 
   return (
@@ -97,7 +98,7 @@ const Create = () => {
               onChange={(e) => setAssignedTeam(e.target.value)}
             >
               {teams.map((team)=>(
-                <option>{team.name}</option>
+                <option key={uuidv4()}>{team.name}</option>
               ))}
             </select>
           </div>

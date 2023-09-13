@@ -1,21 +1,19 @@
 import React, { createContext, useContext, useReducer } from "react";
 
-const initialState = {
-  user: null,
-  isAuthenticated: false,
-};
-
 const AuthContext = createContext();
 
 const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      return {
+      const newState = {
         ...state,
         user: action.payload,
         isAuthenticated: true,
       };
+      localStorage.setItem("authState", JSON.stringify(newState));
+      return newState;
     case "LOGOUT":
+      localStorage.removeItem("authState");
       return {
         ...state,
         user: null,
@@ -26,7 +24,16 @@ const authReducer = (state, action) => {
   }
 };
 
+
 export const AuthProvider = ({ children }) => {
+  const storedAuthState = localStorage.getItem("authState");
+  const initialState = storedAuthState
+    ? JSON.parse(storedAuthState)
+    : {
+        user: null,
+        isAuthenticated: false,
+      };
+
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   return (
@@ -35,6 +42,7 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
 
 export const useAuth = () => {
   return useContext(AuthContext);

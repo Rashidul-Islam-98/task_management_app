@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { getDatabase } from "../../config/db";
+import { openDatabase } from "../../config/db";
 import "./register.css";
 
 export default function Register() {
@@ -12,11 +12,11 @@ export default function Register() {
   const [error, setError] = useState(false);
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError(false);
     try {
-      const db = getDatabase();
+      const db = await openDatabase();
       const transaction = db.transaction(['users'], 'readwrite');
       const store = transaction.objectStore('users');
 
@@ -28,7 +28,7 @@ export default function Register() {
         password,
       };
 
-      const request = store.add(registrationData);
+      const request = await store.add(registrationData);
 
       request.onsuccess = () => {
         window.location.replace("/login");
@@ -44,45 +44,53 @@ export default function Register() {
     }
   };
 
+
+
   return (
     <div className="register">
       <span className="registerTitle">Register</span>
       <form className="registerForm" onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input
-          type="text"
-          className="registerInput"
-          placeholder="Enter your username..."
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label>Email</label>
-        <input
-          type="text"
-          className="registerInput"
-          placeholder="Enter your email..."
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label>Role</label>
-        <input
-          type="text"
-          className="registerInput"
-          placeholder="Enter your role..."
-          onChange={(e) => setRole(e.target.value)}
-        />
-        <label>Expertise</label>
-        <input
-          type="text"
-          className="registerInput"
-          placeholder="Enter your expertise..."
-          onChange={(e) => setExpertise(e.target.value)}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          className="registerInput"
-          placeholder="Enter your password..."
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="registerColumn">
+          <label>Username :</label>
+          <input
+            type="text"
+            className="registerInput"
+            placeholder="Enter your username..."
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <label>Email : </label>
+          <input
+            type="text"
+            className="registerInput"
+            placeholder="Enter your email..."
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="registerColumn ">
+          <label>Role : </label>
+          <input
+            type="text"
+            className="registerInput"
+            placeholder="Enter your role..."
+            onChange={(e) => setRole(e.target.value)}
+          />
+          <label>Expertise : </label>
+          <input
+            type="text"
+            className="registerInput"
+            placeholder="Enter your expertise..."
+            onChange={(e) => setExpertise(e.target.value)}
+          />
+        </div>
+        <div className="registerColumn">
+          <label>Password : </label>
+          <input
+            type="password"
+            className="registerInput"
+            placeholder="Enter your password..."
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
         <button className="registerButton" type="submit">
           Register
         </button>

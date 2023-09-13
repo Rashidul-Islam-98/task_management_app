@@ -10,6 +10,7 @@ import { openDatabase } from './config/db';
 import SingleTask from './components/SingleTask/singleTask';
 import CreateTeam from './components/createTeam/createTeam';
 import { useAuth} from "./components/Auth/auth";
+import Dashboard from './components/Dashboard/Dashboard';
 
 openDatabase();
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/teams" element={<Teams />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
+        <Route path="/dashboard" element={state.isAuthenticated? <Dashboard /> : <Login />} />
         <Route path="/tasks/:taskId" element={<SingleTask />} />
         <Route path="/teams/create-team" element={state.isAuthenticated? <CreateTeam /> : <Login />} />
       </Routes>

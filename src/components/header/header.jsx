@@ -3,10 +3,7 @@ import './header.css';
 import { useAuth } from '../Auth/auth';
 
 const Header = () => {
-    const { dispatch,state }=useAuth();
-    const handleLogout = ()=>{
-        dispatch({ type: "LOGOUT"});
-    }
+    const { state }=useAuth();
     return (
         <div className='top'>
             <div className="topleft">
@@ -28,11 +25,12 @@ const Header = () => {
                     </li>
                 </ul>
             </div>
-           {state.isAuthenticated?<div className="topRight">
-            <ul className="topList">
-                <li onClick={handleLogout} className="topListItem">LOGOUT</li>
-            </ul>
-           </div>: <div className="topRight">
+           {state.isAuthenticated?(
+            <div className="topRight">
+          <Link to="/dashboard">
+            <img className="topImg" src="https://i.ibb.co/bzK7Ww7/profile.jpg" alt="" />
+          </Link></div>
+        ): (<div className="topRight">
                 
                 <ul className="topList">
                     <li className="topListItem">
@@ -46,7 +44,7 @@ const Header = () => {
                         </Link>
                     </li>
                 </ul>
-        </div>}
+        </div>)}
         </div>
     )
 }
